@@ -22,10 +22,10 @@ A TDD approach (partially :)) to implement a simple maze solver by well known al
  * Type `help` then it will list down the accepted commands
   `shell:>help`
   * Commands
-    * `process-file <filepath>` 
+    * `process-file <filepath>`  (This will process the file and print the solution)
         eg: process-file /tmp/maze-runner.txt
         
-    * `list-file <folder path>`
+    * `list-files <folder path>`
         eg: list files in the folder/directory
         
   * Type `exit` to exit the program.
