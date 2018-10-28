@@ -6,7 +6,7 @@ import lombok.experimental.Accessors;
 
 @RequiredArgsConstructor
 @Accessors(fluent = true) @Getter
-public class MazeCell {
-    private final MazeCell parentCell;
-    private final CellCoordinate cellCoordinate;
+public class CellCoordinate {
+    private final int x;
+    private final int y;
 }
