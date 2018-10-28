@@ -14,14 +14,14 @@ public class MazeSolverCommandProcessor {
     MazeSolverCommandLineService mazeSolverCommandLineService;
 
     @ShellMethod ("Enter directory path to choose a file - default /tmp/sample")
-    public String chooseFolder(
+    public String listFiles(
             @ShellOption(defaultValue = ".") String filePath
     ) {
         return String.join("\r\n", mazeSolverCommandLineService.listMazeInputs(filePath));
     }
 
     @ShellMethod ("Enter path of the maze input file")
-    public String chooseFile(
+    public String processFile(
             @ShellOption(defaultValue = "/tmp/sample/sample1.txt") String filePath
     ) {
         return mazeSolverCommandLineService.processFile(filePath);

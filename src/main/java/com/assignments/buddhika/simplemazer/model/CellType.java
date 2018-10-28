@@ -3,7 +3,7 @@ package com.assignments.buddhika.simplemazer.model;
 import java.util.Arrays;
 
 public enum CellType {
-    EMPTY(' '), WALL('#'), START('S'), FINISH('F'), ROUTE('-');
+    EMPTY(' '), WALL('#'), START('S'), FINISH('F'), ROUTE('.');
 
     CellType(final char characterType) {
         this.characterType = characterType;
