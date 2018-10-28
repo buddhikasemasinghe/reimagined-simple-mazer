@@ -1,11 +1,11 @@
 # Reimagined Simple Mazer
-A TDD approach (partially :)) to implement a simple maze by well known algorithms in Java 
+A TDD approach (partially :)) to implement a simple maze solver by well known algorithms in Java 
 
 ### Assumptions
-* Evaluators will not expect to re-invent the wheel.
+* Evaluators will not expect me to re-invent the wheel.
 * The purpose is not to develop yet another Maze solver algorithm.
 * Use well known algorithms which were developed by genius computer scientists in the world.
-* The purpose of this assigment is to evaluate the approach for the solution design
+* The purpose of this assignment is to evaluate the approach for the solution design
 * Expect only command line interface
 
 ### Set up
@@ -21,4 +21,24 @@ A TDD approach (partially :)) to implement a simple maze by well known algorithm
  * It will prompt you a shell
  * Type `help` then it will list down the accepted commands
   `shell:>help`
+  * Commands
+    * `process-file <filepath>` 
+        eg: process-file /tmp/maze-runner.txt
+        
+    * `list-file <folder path>`
+        eg: list files in the folder/directory
+        
   * Type `exit` to exit the program.
+  
+  
+### Evaluation
+ * Todo
+ 
+### Authors
+ * Buddhika Semasinghe <buddhika.semasinghe@gmail.com>
+ 
+## Enhancement / Todo
+* Implement validation
+* Increase test coverage
+* Refactor service layer
+* Implement other algorithms
