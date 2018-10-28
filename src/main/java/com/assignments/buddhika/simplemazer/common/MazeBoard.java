@@ -5,6 +5,7 @@ import com.assignments.buddhika.simplemazer.model.CellType;
 import com.assignments.buddhika.simplemazer.model.MazeCell;
 import com.assignments.buddhika.simplemazer.model.VisitStatus;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 
@@ -15,9 +16,9 @@ public class MazeBoard {
     private CellType[][] mazeCell;
     @Getter
     private VisitStatus[][] visitStatus;
-    @Getter
+    @Getter @Setter
     private MazeCell startCell;
-    @Getter
+    @Getter @Setter
     private MazeCell endCell;
     @Getter
     private int width;
@@ -26,13 +27,13 @@ public class MazeBoard {
     /**
      *
      * @param width  Maximum x value
-     * @param length Maximum y value
+     * @param height Maximum y value
      */
-    public void init(final int width, int length){
-        this.height = length;
+    public void init(final int width, final int height){
+        this.height = height;
         this.width = width;
-        this.mazeCell = new CellType[width][length];
-        this.visitStatus = new VisitStatus[width][length];
+        this.mazeCell = new CellType[width][height];
+        this.visitStatus = new VisitStatus[width][height];
     }
 
     public void markCellVisitStatus(final CellCoordinate coordinate, final VisitStatus visitStatus){

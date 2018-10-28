@@ -32,13 +32,14 @@ public class BFSMazeSolverTest {
 
     @BeforeEach
     public void setUp() {
-        classToBeTested = new BFSMazeSolver(mazeBoardUtil);
+        classToBeTested = new BFSMazeSolver(mazeBoard, mazeBoardUtil);
     }
 
     @Test
     void whenRouteNotFound_ShouldThrowException() {
+
         assertThrows(MazeSolverServiceException.class, () ->
-                classToBeTested.solveAndFindRoute(mazeBoard));
+                classToBeTested.solveAndFindRoute());
     }
 
     @Test
@@ -50,7 +51,7 @@ public class BFSMazeSolverTest {
         List<MazeCell> mazeCellList = new ArrayList<>();
         when(mazeBoardUtil.findBackTrackedPath(mazeBoard.getStartCell())).thenReturn(mazeCellList);
 
-        Assertions.assertEquals(mazeCellList, classToBeTested.solveAndFindRoute(mazeBoard));
+        Assertions.assertEquals(mazeCellList, classToBeTested.solveAndFindRoute());
     }
 
 }

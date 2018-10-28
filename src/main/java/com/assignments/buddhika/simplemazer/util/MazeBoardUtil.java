@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
 public class MazeBoardUtil {
 
     private MazeBoard mazeBoard;
@@ -60,6 +59,6 @@ public class MazeBoardUtil {
             default:
                 break;
         }
-        return new MazeCell(currentCell.parentCell(), newCoordinate);
+        return new MazeCell(currentCell, newCoordinate);
     }
 }

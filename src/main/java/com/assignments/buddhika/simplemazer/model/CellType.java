@@ -1,11 +1,21 @@
 package com.assignments.buddhika.simplemazer.model;
 
-public enum CellType {
-    EMPTY(' '), WALL('#'), START('S'), FINISH('F');
+import java.util.Arrays;
 
-     CellType(final char characterType){
-        this.characterType =characterType;
+public enum CellType {
+    EMPTY(' '), WALL('#'), START('S'), FINISH('F'), ROUTE('-');
+
+    CellType(final char characterType) {
+        this.characterType = characterType;
     }
 
     private char characterType;
+
+    public char getCharacterType() {
+        return characterType;
+    }
+
+    public static CellType getByCharacter(char shortCut) {
+        return Arrays.stream(CellType.values()).filter(v -> v.characterType == shortCut).findAny().orElse(null);
+    }
 }
