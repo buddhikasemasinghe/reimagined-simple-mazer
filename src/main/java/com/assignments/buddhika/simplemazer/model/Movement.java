@@ -1,4 +1,5 @@
 package com.assignments.buddhika.simplemazer.model;
 
-public class MazeBoard {
+public enum Movement {
+    NORTH, SOUTH, EAST, WEST
 }

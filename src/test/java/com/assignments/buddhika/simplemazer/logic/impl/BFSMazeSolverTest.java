@@ -1,21 +1,56 @@
 package com.assignments.buddhika.simplemazer.logic.impl;
 
-import org.junit.Assert;
-import org.junit.Test;
+import com.assignments.buddhika.simplemazer.common.MazeBoard;
+import com.assignments.buddhika.simplemazer.exception.MazeSolverServiceException;
+import com.assignments.buddhika.simplemazer.model.CellType;
+import com.assignments.buddhika.simplemazer.model.MazeCell;
+import com.assignments.buddhika.simplemazer.util.MazeBoardUtil;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.Assert.*;
+import java.util.ArrayList;
+import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+
+@ExtendWith(MockitoExtension.class)
 public class BFSMazeSolverTest {
 
-    @Test
-    public void contextLoads() {
-        System.out.println("###############################################################");
-        System.out.println("============================Testing BFS Maze Solver============================");
-        System.out.println("###############################################################");
+    @Mock
+    private MazeBoard mazeBoard;
+    @Mock
+    private MazeBoardUtil mazeBoardUtil;
+
+    BFSMazeSolver classToBeTested;
+
+    @BeforeEach
+    public void setUp() {
+        classToBeTested = new BFSMazeSolver(mazeBoardUtil);
     }
 
     @Test
-    public void findPossibleRoutes() {
-        Assert.assertTrue(true);
+    void whenRouteNotFound_ShouldThrowException() {
+        assertThrows(MazeSolverServiceException.class, () ->
+                classToBeTested.solveAndFindRoute(mazeBoard));
     }
+
+    @Test
+    void whenRouteIsFound_shouldBackTrack() throws MazeSolverServiceException {
+        when(mazeBoard.getStartCell()).thenReturn(mock(MazeCell.class));
+        when(mazeBoardUtil.checkCellLocationValidity(mazeBoard.getStartCell())).thenReturn(true);
+        when(mazeBoardUtil.hasItBeenAlreadyVisited(mazeBoard.getStartCell())).thenReturn(false);
+        when(mazeBoardUtil.findCellType(mazeBoard.getStartCell())).thenReturn(CellType.FINISH);
+        List<MazeCell> mazeCellList = new ArrayList<>();
+        when(mazeBoardUtil.findBackTrackedPath(mazeBoard.getStartCell())).thenReturn(mazeCellList);
+
+        Assertions.assertEquals(mazeCellList, classToBeTested.solveAndFindRoute(mazeBoard));
+    }
+
 }

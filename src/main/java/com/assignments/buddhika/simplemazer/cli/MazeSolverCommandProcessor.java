@@ -1,7 +1,7 @@
 package com.assignments.buddhika.simplemazer.cli;
 
-import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellComponent;
+import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
 
