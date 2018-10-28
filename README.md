@@ -1,5 +1,5 @@
 # Reimagined Simple Mazer
-A TDD approach to implement a simple maze by well known algorithms in Java 
+A TDD approach (partially :)) to implement a simple maze by well known algorithms in Java 
 
 ### Assumptions
 * Evaluators will not expect to re-invent the wheel.

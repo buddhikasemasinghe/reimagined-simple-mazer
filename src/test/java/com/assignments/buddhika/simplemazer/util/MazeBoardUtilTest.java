@@ -122,15 +122,13 @@ class MazeBoardUtilTest {
     @Test
     void findLocationAfterMovement() {
         MazeCell mazeCell = mock(MazeCell.class);
-        MazeCell parentCell = mock(MazeCell.class);
-        when(mazeCell.parentCell()).thenReturn(parentCell);
         CellCoordinate cellCoordinate = mock(CellCoordinate.class);
         when(cellCoordinate.x()).thenReturn(1);
         when(cellCoordinate.y()).thenReturn(1);
         when(mazeCell.cellCoordinate()).thenReturn(cellCoordinate);
 
         MazeCell movedCell = classTobeTested.findLocationAfterMovement(mazeCell, Movement.NORTH);
-        Assertions.assertEquals(parentCell, movedCell.parentCell());
+        Assertions.assertEquals(mazeCell, movedCell.parentCell());
         Assertions.assertEquals(1, movedCell.cellCoordinate().x());
         Assertions.assertEquals(0, movedCell.cellCoordinate().y());
 

@@ -8,23 +8,23 @@ import com.assignments.buddhika.simplemazer.model.MazeCell;
 import com.assignments.buddhika.simplemazer.model.Movement;
 import com.assignments.buddhika.simplemazer.model.VisitStatus;
 import com.assignments.buddhika.simplemazer.util.MazeBoardUtil;
+import javafx.scene.control.Cell;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
-@Service
 public class BFSMazeSolver implements MazeSolver {
     private MazeBoardUtil mazeBoardUtil;
+    private MazeBoard mazeBoard;
 
-    public BFSMazeSolver(final MazeBoardUtil mazeBoardUtil){
+    public BFSMazeSolver(final MazeBoard mazeBoard, final MazeBoardUtil mazeBoardUtil){
+        this.mazeBoard = mazeBoard;
         this.mazeBoardUtil = mazeBoardUtil;
     }
 
     @Override
-    public List<MazeCell> solveAndFindRoute(MazeBoard mazeBoard) throws MazeSolverServiceException {
+    public List<MazeCell> solveAndFindRoute() throws MazeSolverServiceException {
         final MazeCell startPoint = mazeBoard.getStartCell();
         LinkedList<MazeCell> cellTobeVisited = new LinkedList<>();
         //Starting the journey
@@ -39,7 +39,7 @@ public class BFSMazeSolver implements MazeSolver {
             }
             CellType currentCellType = mazeBoardUtil.findCellType(currentCell);
             if(currentCellType == CellType.WALL){
-                mazeBoard.markCellVisitStatus(currentCell.cellCoordinate(), VisitStatus.VISITED);
+                this.mazeBoard.markCellVisitStatus(currentCell.cellCoordinate(), VisitStatus.VISITED);
                 continue;
             }
 
@@ -56,5 +56,47 @@ public class BFSMazeSolver implements MazeSolver {
 
         }
         throw new MazeSolverServiceException("Can not find a route from start to finish");
+    }
+
+    @Override
+    public String printMazePath(final List<MazeCell> path) {
+        CellType[][] clonedMazeBoard = Arrays.stream(this.mazeBoard.getMazeCell()).map(cellTypes -> Arrays.copyOf(cellTypes, cellTypes.length)).
+                toArray(CellType[][]::new);
+
+        for(MazeCell mazeCell: path){
+            CellType cellType = this.mazeBoardUtil.findCellType(mazeCell);
+            if(cellType == CellType.START || cellType == CellType.FINISH) {
+                continue;
+            }
+            clonedMazeBoard[mazeCell.cellCoordinate().x()][mazeCell.cellCoordinate().y()] = CellType.ROUTE;
+        }
+        StringJoiner displayText = new StringJoiner("");
+        for(int rowCount = 0; rowCount < this.mazeBoard.getWidth(); rowCount++){
+            for(int colCount = 0; colCount < this.mazeBoard.getHeight(); colCount++){
+                CellType cellType = clonedMazeBoard[rowCount][colCount];
+                switch (cellType){
+                    case START:
+                        displayText.add(CellType.START.getCharacterType()+"");
+                        break;
+                    case FINISH:
+                        displayText.add(CellType.FINISH.getCharacterType()+"");
+                        break;
+                    case EMPTY:
+                        displayText.add(CellType.EMPTY.getCharacterType()+"");
+                        break;
+                    case ROUTE:
+                        displayText.add(CellType.ROUTE.getCharacterType()+"");
+                        break;
+                    case WALL:
+                        displayText.add(CellType.WALL.getCharacterType()+"");
+                        break;
+                        default:
+                            break;
+                }
+            }
+            displayText.add("\r\n");
+
+        }
+        return displayText.toString();
     }
 }
